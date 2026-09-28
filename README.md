@@ -1,5 +1,9 @@
 # Telnyx UI tests: Cypress + Cucumber
 
+[![E2E tests](https://github.com/AndriyGvozd/cucumber-cypress-telnyx/actions/workflows/e2e.yml/badge.svg)](https://github.com/AndriyGvozd/cucumber-cypress-telnyx/actions/workflows/e2e.yml)
+
+**Latest test report:** https://andriygvozd.github.io/cucumber-cypress-telnyx/
+
 End-to-end UI tests for [telnyx.com](https://telnyx.com), written in Gherkin (Cucumber) and run with Cypress + TypeScript.
 
 ## Tech stack
@@ -61,6 +65,15 @@ scripts/
   generate-report.mjs         HTML report generator
 reports/                      Test results (git-ignored)
 ```
+
+## CI pipeline
+
+The [E2E tests](.github/workflows/e2e.yml) workflow runs on every push and pull request to `main`, and can be started manually from the Actions tab with an optional tag expression (e.g. `@critical`).
+
+1. Installs dependencies and runs all tests with `config/cypress.ci.config.ts`.
+2. Builds the HTML report.
+3. On failure, uploads screenshots and videos as the `cypress-failures` artifact.
+4. Publishes the report to GitHub Pages (from `main`, even when tests fail).
 
 ## Test cases
 
