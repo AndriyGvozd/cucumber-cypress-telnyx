@@ -1,0 +1,25 @@
+{
+  "name": "cucumber-cypress-telnyx",
+  "version": "1.0.0",
+  "description": "Cypress + Cucumber UI tests for https://telnyx.com",
+  "scripts": {
+    "open": "cypress open --config-file config/cypress.config.ts",
+    "test": "cypress run --config-file config/cypress.config.ts",
+    "test:ci": "cypress run --config-file config/cypress.ci.config.ts",
+    "test:critical": "cypress run --config-file config/cypress.config.ts --expose tags=@critical",
+    "report": "node scripts/generate-report.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^28.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
+    "@types/node": "^26.6.2",
+    "cypress": "^16.1.0",
+    "esbuild": "^0.28.2",
+    "multiple-cucumber-html-reporter": "^4.3.0",
+    "typescript": "^5.9.3"
+  }
+}
