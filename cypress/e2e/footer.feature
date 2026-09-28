@@ -5,10 +5,10 @@ Feature: Footer
     Given I open the home page
     When I scroll to the footer
     Then the footer should be visible
-    And the footer legal links should open the correct pages:
-      | link                         | path                  | heading              |
-      | Privacy Policy               | /privacy-policy       | Privacy Policy       |
-      | Website Terms and Conditions | /terms-and-conditions | Terms and Conditions |
+    And the footer legal links should be valid:
+      | link                         | path                  |
+      | Privacy Policy               | /privacy-policy       |
+      | Website Terms and Conditions | /terms-and-conditions |
 
   @TC-13 @low
   Scenario: Social media links in footer

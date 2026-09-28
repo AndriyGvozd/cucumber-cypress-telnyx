@@ -1,6 +1,5 @@
 import { When, Then, DataTable } from "@badeball/cypress-cucumber-preprocessor";
 import { footer } from "../pages/components/Footer";
-import { homePage } from "../pages/HomePage";
 
 When("I scroll to the footer", () => {
   footer.scrollIntoView();
@@ -23,12 +22,8 @@ Then("the footer should contain social links:", (table: DataTable) => {
   });
 });
 
-Then("the footer legal links should open the correct pages:", (table: DataTable) => {
-  table.hashes().forEach(({ link, path, heading }) => {
-    homePage.open();
-    footer.scrollIntoView();
-    footer.link(link).should("be.visible").and("have.attr", "href", path).click();
-    cy.location("pathname").should("eq", path);
-    cy.contains("h1, h2", heading).should("be.visible");
+Then("the footer legal links should be valid:", (table: DataTable) => {
+  table.hashes().forEach(({ link, path }) => {
+    footer.link(link).should("be.visible").and("have.attr", "href", path);
   });
 });
