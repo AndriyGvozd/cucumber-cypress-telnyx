@@ -4,6 +4,8 @@
 
 **Latest test report:** https://andriygvozd.github.io/cucumber-cypress-telnyx/
 
+**Test plan (15 test cases):** [Google Sheets](https://docs.google.com/spreadsheets/d/1PAosYndXiqYWPgMvU4DTYdktVNmZUG-YbsHvIRwLQy4/edit?gid=192333436#gid=192333436)
+
 End-to-end UI tests for [telnyx.com](https://telnyx.com), written in Gherkin (Cucumber) and run with Cypress + TypeScript.
 
 ## Tech stack
