@@ -1,17 +1,22 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import { header } from "../pages/components/Header";
 import { signUpPage } from "../pages/SignUpPage";
+import content from "../../fixtures/content.json";
 
 When("I click the Sign up button in the header", () => {
   header.signUpButton.click();
 });
 
 Then("the sign up form should be displayed", () => {
-  signUpPage.heading.should("be.visible").and("contain.text", "Create your account");
+  signUpPage.heading.should("be.visible").and("contain.text", content.signUp.heading);
   signUpPage.form.should("be.visible");
   signUpPage.emailInput.should("be.visible");
   signUpPage.termsCheckbox.should("exist");
-  signUpPage.submitButton.should("be.visible").invoke("text").should("match", /create account/i);
+  signUpPage.submitButton
+    .should("be.visible")
+    .invoke("text")
+    .invoke("toLowerCase")
+    .should("contain", content.signUp.submitButton);
 });
 
 Given("I open the sign up page", () => {
@@ -48,7 +53,7 @@ When("I accept the Terms and Privacy Policy", () => {
 Then("the email field should be invalid", () => {
   signUpPage.emailInput.then(($input) => {
     const input = $input[0] as HTMLInputElement;
-    expect(input.validity.valid, "email validity").to.be.false;
-    expect(input.validationMessage, "browser validation message").not.to.be.empty;
+    expect(input.validity.valid, "email validity").to.equal(false);
+    expect(input.validationMessage, "browser validation message").not.to.equal("");
   });
 });

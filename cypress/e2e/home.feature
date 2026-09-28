@@ -1,6 +1,6 @@
 Feature: Home page
 
-  @TC-01 @critical
+  @TC-1 @critical
   Scenario: Home page loads successfully
     Given I open the home page
     Then the page title should contain "Telnyx"

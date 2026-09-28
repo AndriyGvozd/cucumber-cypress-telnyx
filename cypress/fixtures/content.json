@@ -1,0 +1,19 @@
+{
+  "signUp": {
+    "heading": "Create your account",
+    "submitButton": "create account"
+  },
+  "notFound": {
+    "errorCode": "404",
+    "heading": "Oops, this page doesn’t exist"
+  },
+  "portal": {
+    "origin": "https://portal.telnyx.com",
+    "loginPath": "/login/sign-in",
+    "title": "Login",
+    "heading": "Welcome Back"
+  },
+  "cookies": {
+    "consentCookie": "OptanonAlertBoxClosed"
+  }
+}

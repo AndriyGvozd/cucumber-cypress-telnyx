@@ -1,8 +1,6 @@
-class ProductPage {
-  get heading() {
-    return cy.get("main h1").first();
-  }
+import { BasePage } from "./BasePage";
 
+class ProductPage extends BasePage {
   get description() {
     return this.heading.parent().find("p").first();
   }

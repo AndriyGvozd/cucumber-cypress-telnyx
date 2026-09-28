@@ -1,13 +1,13 @@
 Feature: Sign up
 
-  @TC-07 @critical
+  @TC-7 @critical
   Scenario: Sign up page opens
     Given I open the home page
     When I click the Sign up button in the header
     Then the URL should contain "/sign-up"
     And the sign up form should be displayed
 
-  @TC-08 @high
+  @TC-8 @high
   Scenario: Sign up form validation with empty fields
     Given I open the sign up page
     When I leave all sign up fields empty
@@ -16,7 +16,7 @@ Feature: Sign up
     And I should see the terms error "You must accept the Terms and Conditions."
     And the URL should contain "/sign-up"
 
-  @TC-09 @high
+  @TC-9 @high
   Scenario: Sign up form validation with invalid email
     Given I open the sign up page
     When I enter "test@" into the email field

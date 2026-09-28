@@ -1,5 +1,6 @@
 import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import { notFoundPage } from "../pages/NotFoundPage";
+import content from "../../fixtures/content.json";
 
 Then("the page {string} should respond with status {int}", (path: string, status: number) => {
   cy.request({ url: path, failOnStatusCode: false }).its("status").should("eq", status);
@@ -11,7 +12,7 @@ Given("I open the non-existent page {string}", (path: string) => {
 
 Then("the 404 page should be displayed", () => {
   notFoundPage.errorCode.should("be.visible");
-  notFoundPage.heading.should("be.visible").and("contain.text", "this page doesn");
+  notFoundPage.heading.should("be.visible").and("contain.text", content.notFound.heading);
 });
 
 When("I click the Back to home link", () => {

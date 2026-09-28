@@ -5,6 +5,9 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  # Nightly run: the tested site changes independently of this repository
+  schedule:
+    - cron: "0 3 * * *"
   workflow_dispatch:
     inputs:
       tags:
@@ -12,33 +15,66 @@ on:
         required: false
         default: ""
 
-# Only one Pages deployment at a time; a newer run cancels an older one
+# Least privilege by default; the deploy job requests Pages permissions itself
+permissions:
+  contents: read
+
+# A newer run on the same branch cancels the older one
 concurrency:
   group: e2e-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  test:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+        env:
+          # Linting does not need the Cypress binary
+          CYPRESS_INSTALL_BINARY: 0
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Check formatting
+        run: npm run format:check
+
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
           cache: npm
 
       - name: Run Cypress tests
         id: tests
         # Let the job continue so the report is still built and published when tests fail
         continue-on-error: true
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
-          command: >-
-            npx cypress run --config-file config/cypress.ci.config.ts
-            ${{ inputs.tags && format('--expose tags="{0}"', inputs.tags) || '' }}
+          command: npm run test:ci
+        env:
+          # Passed through env, not interpolated into the command, to prevent script injection
+          TAGS: ${{ inputs.tags }}
 
       - name: Generate HTML report
         if: always()
@@ -46,7 +82,7 @@ jobs:
 
       - name: Upload screenshots and videos
         if: steps.tests.outcome == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cypress-failures
           path: |
@@ -54,9 +90,16 @@ jobs:
             cypress/videos
           if-no-files-found: ignore
 
+      - name: Upload report as artifact
+        if: always() && github.ref != 'refs/heads/main'
+        uses: actions/upload-artifact@v7
+        with:
+          name: html-report
+          path: reports/html
+
       - name: Upload report for GitHub Pages
         if: always() && github.ref == 'refs/heads/main'
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: reports/html
 
@@ -67,7 +110,7 @@ jobs:
   deploy-report:
     needs: test
     # Publish the report even when tests failed, but only from main
-    if: always() && github.ref == 'refs/heads/main' && needs.test.result != 'cancelled'
+    if: always() && github.ref == 'refs/heads/main' && (needs.test.result == 'success' || needs.test.result == 'failure')
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -78,4 +121,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

@@ -1,6 +1,6 @@
 Feature: Cookie banner
 
-  @TC-02 @high
+  @TC-2 @high
   Scenario: Accept cookie banner
     Given I open the home page
     Then the cookie banner should be visible

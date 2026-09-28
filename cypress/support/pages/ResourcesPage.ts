@@ -1,8 +1,6 @@
-class ResourcesPage {
-  get heading() {
-    return cy.get("main h1").first();
-  }
+import { BasePage } from "./BasePage";
 
+class ResourcesPage extends BasePage {
   get articleLinks() {
     return cy.get('main a[href*="/resources/"]');
   }

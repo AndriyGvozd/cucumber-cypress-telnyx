@@ -6,7 +6,9 @@
     "moduleResolution": "bundler",
     "types": ["cypress", "node"],
     "esModuleInterop": true,
-    "strict": true
+    "resolveJsonModule": true,
+    "strict": true,
+    "noEmit": true
   },
   "include": ["cypress/**/*.ts", "config/**/*.ts"]
 }

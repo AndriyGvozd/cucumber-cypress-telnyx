@@ -1,7 +1,9 @@
+import { LONG_TIMEOUT } from "../constants";
+
 class ContactPage {
   // Marketo form is loaded by a third-party script, so it can take longer to appear
   get form() {
-    return cy.get("#mktoForm_1987", { timeout: 15000 });
+    return cy.get("#mktoForm_1987", { timeout: LONG_TIMEOUT });
   }
 
   get submitButton() {

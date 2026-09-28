@@ -1,5 +1,6 @@
 import { When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import { cookieBanner } from "../pages/components/CookieBanner";
+import content from "../../fixtures/content.json";
 
 When("I accept cookies", () => {
   cookieBanner.accept();
@@ -14,10 +15,9 @@ Then("the cookie banner should be visible", () => {
 });
 
 Then("the cookie banner should not be visible", () => {
-  // OneTrust removes the banner from the DOM or hides it, both are valid
-  cy.get("body").find("#onetrust-banner-sdk:visible").should("not.exist");
+  cookieBanner.visibleBanner.should("not.exist");
 });
 
 Then("the cookie consent should be saved", () => {
-  cy.getCookie("OptanonAlertBoxClosed").should("exist");
+  cy.getCookie(content.cookies.consentCookie).should("exist");
 });

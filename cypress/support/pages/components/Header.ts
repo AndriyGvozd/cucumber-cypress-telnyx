@@ -4,7 +4,7 @@ class Header {
   }
 
   get logo() {
-    return this.root.find('a[href="/"]');
+    return this.root.find('a[href="/"]:visible').first();
   }
 
   menuItem(name: string) {
@@ -26,7 +26,6 @@ class Header {
   get logInLink() {
     return this.root.find('a[href*="portal.telnyx.com"]:visible');
   }
-
 }
 
 export const header = new Header();

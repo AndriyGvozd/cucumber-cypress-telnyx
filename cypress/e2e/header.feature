@@ -1,6 +1,6 @@
 Feature: Header navigation
 
-  @TC-03 @high
+  @TC-3 @high
   Scenario: Main navigation menu items are displayed
     Given I open the home page
     Then the main menu should contain items:
@@ -11,7 +11,7 @@ Feature: Header navigation
       | Resources   |
       | Developers  |
 
-  @TC-04 @medium
+  @TC-4 @medium
   Scenario: Voice API product page content
     Given I open the home page
     When I open the "Products" menu
@@ -21,7 +21,7 @@ Feature: Header navigation
     And the product description should be visible
     And the "Talk to an expert" button should be visible
 
-  @TC-05 @high
+  @TC-5 @high
   Scenario: Pricing page opens from header
     Given I open the home page
     When I open the "Pricing" menu
@@ -30,7 +30,7 @@ Feature: Header navigation
     And the pricing heading should contain "SMS API Pricing"
     And prices should be displayed
 
-  @TC-06 @medium
+  @TC-6 @medium
   Scenario: Redirect to Resources page
     Given I open the home page
     When I open the "Resources" menu

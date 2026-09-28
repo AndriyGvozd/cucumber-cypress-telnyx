@@ -1,25 +1,42 @@
 {
   "name": "cucumber-cypress-telnyx",
   "version": "1.0.0",
+  "private": true,
   "description": "Cypress + Cucumber UI tests for https://telnyx.com",
+  "author": "AndriyGvozd",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AndriyGvozd/cucumber-cypress-telnyx.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "type": "commonjs",
   "scripts": {
     "open": "cypress open --config-file config/cypress.config.ts",
     "test": "cypress run --config-file config/cypress.config.ts",
-    "test:ci": "cypress run --config-file config/cypress.ci.config.ts",
+    "test:ci": "cypress run --config-file config/cypress.ci.config.ts ${TAGS:+--expose \"tags=$TAGS\"}",
     "test:critical": "cypress run --config-file config/cypress.config.ts --expose tags=@critical",
-    "report": "node scripts/generate-report.mjs"
+    "report": "node scripts/generate-report.mjs",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^28.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
-    "@types/node": "^26.6.2",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.4",
     "cypress": "^16.1.0",
     "esbuild": "^0.28.2",
+    "eslint": "^10.11.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-cypress": "^7.0.2",
     "multiple-cucumber-html-reporter": "^4.3.0",
-    "typescript": "^5.9.3"
+    "prettier": "^3.9.9",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.70.1"
   }
 }

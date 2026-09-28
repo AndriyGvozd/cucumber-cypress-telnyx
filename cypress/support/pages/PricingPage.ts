@@ -1,8 +1,6 @@
-class PricingPage {
-  get heading() {
-    return cy.get("main h1").first();
-  }
+import { BasePage } from "./BasePage";
 
+class PricingPage extends BasePage {
   get prices() {
     return cy.get("main").contains(/\$\d/);
   }

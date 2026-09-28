@@ -1,6 +1,8 @@
+import { header } from "./Header";
+
 class MobileMenu {
   get burgerButton() {
-    return cy.get('#site-header button[aria-controls="main-menu-content"]');
+    return header.root.find('button[aria-controls="main-menu-content"]');
   }
 
   get content() {
@@ -14,7 +16,7 @@ class MobileMenu {
   // Bottom links (Contact us, Log in) live outside #main-menu-content,
   // so search in the whole header and take only the visible link
   link(name: string) {
-    return cy.get("#site-header a:visible").contains(name);
+    return header.root.find("a:visible").contains(name);
   }
 
   open() {

@@ -1,10 +1,9 @@
-class NotFoundPage {
-  get errorCode() {
-    return cy.contains("h2", "404");
-  }
+import content from "../../fixtures/content.json";
+import { BasePage } from "./BasePage";
 
-  get heading() {
-    return cy.get("main h1").first();
+class NotFoundPage extends BasePage {
+  get errorCode() {
+    return cy.contains("h2", content.notFound.errorCode);
   }
 
   get backToHomeLink() {
