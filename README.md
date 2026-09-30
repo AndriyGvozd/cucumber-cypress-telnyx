@@ -45,6 +45,8 @@ npx cypress run --config-file config/cypress.config.ts --expose tags="@high or @
 TAGS="@TC-5" npm run test:ci
 ```
 
+`TAGS` is read by `config/cypress.ci.config.ts`, so `npm run test:ci` works in any shell. On Windows, set the variable with `set TAGS=@TC-5` (cmd) or `$env:TAGS="@TC-5"` (PowerShell) before running it.
+
 The HTML report is generated at `reports/html/index.html`.
 
 ## Configuration
@@ -98,7 +100,7 @@ Every scenario is tagged with its test plan ID and priority, e.g. `@TC-1 @critic
 | TC-3  | Main navigation menu items are displayed   | High     | `header.feature`  |
 | TC-4  | Voice API product page content             | Medium   | `header.feature`  |
 | TC-5  | Pricing page opens from header             | High     | `header.feature`  |
-| TC-6  | Redirect to Resources page                 | Medium   | `header.feature`  |
+| TC-6  | Redirect to Resource Center page           | Medium   | `header.feature`  |
 | TC-7  | Sign up page opens                         | Critical | `signup.feature`  |
 | TC-8  | Sign up form validation with empty fields  | High     | `signup.feature`  |
 | TC-9  | Sign up form validation with invalid email | High     | `signup.feature`  |

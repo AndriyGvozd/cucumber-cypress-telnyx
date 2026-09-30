@@ -7,16 +7,27 @@ class Header {
     return this.root.find('a[href="/"]:visible').first();
   }
 
+  // Top-level items are Radix UI dropdown triggers; their ids are generated, so the item is found
+  // by the dropdown attribute and its label
+  get menuItems() {
+    return this.root.find('button[aria-haspopup="menu"]:visible');
+  }
+
   menuItem(name: string) {
-    return this.root.contains("button", name);
+    return this.root.contains('button[aria-haspopup="menu"]', name);
   }
 
   openMenu(name: string) {
     this.menuItem(name).should("be.visible").click();
   }
 
-  dropdownLink(name: string) {
-    return this.root.find("a:visible").contains(name);
+  get openedDropdown() {
+    return cy.get('[role="menu"][data-state="open"]');
+  }
+
+  // Several links in one dropdown can lead to the same page, so the label narrows the match
+  dropdownLink(name: string, path: string) {
+    return this.openedDropdown.contains(`a[href="${path}"]`, name);
   }
 
   get signUpButton() {

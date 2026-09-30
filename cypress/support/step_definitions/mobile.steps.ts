@@ -11,6 +11,7 @@ When("I open the burger menu", () => {
 
 Then("the burger menu should be opened", () => {
   mobileMenu.burgerButton.should("have.attr", "aria-expanded", "true");
+  mobileMenu.menu.should("have.attr", "data-state", "open");
   mobileMenu.content.should("be.visible");
 });
 
@@ -20,6 +21,6 @@ Then("the burger menu should contain items:", (table: DataTable) => {
   });
 });
 
-When("I click the {string} link in the burger menu", (name: string) => {
-  mobileMenu.link(name).should("be.visible").click();
+When("I click the {string} burger menu link to {string}", (name: string, path: string) => {
+  mobileMenu.link(path).should("be.visible").and("contain.text", name).click();
 });

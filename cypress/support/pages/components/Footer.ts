@@ -3,8 +3,8 @@ class Footer {
     return cy.get("#site-footer");
   }
 
-  link(text: string) {
-    return this.root.contains("a", text);
+  link(path: string) {
+    return this.root.find(`a[href="${path}"]:visible`);
   }
 
   // The footer has desktop and mobile copies of social icons, only one is visible

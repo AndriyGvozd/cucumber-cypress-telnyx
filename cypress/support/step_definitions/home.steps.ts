@@ -10,6 +10,10 @@ Then("the header should be visible", () => {
   header.root.should("be.visible");
 });
 
+Then("the header navigation should be visible", () => {
+  header.menuItems.should("have.length.greaterThan", 0).and("be.visible");
+});
+
 Then("the logo should be visible", () => {
   header.logo.should("be.visible");
 });

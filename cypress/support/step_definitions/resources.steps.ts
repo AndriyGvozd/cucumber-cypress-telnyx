@@ -6,6 +6,6 @@ Then("the resources heading should be visible", () => {
 });
 
 Then("resource articles should be displayed", () => {
-  resourcesPage.articleLinks.should("have.length.greaterThan", 0);
-  resourcesPage.articleLinks.first().should("be.visible");
+  resourcesPage.scrollToArticles();
+  resourcesPage.visibleArticleLinks.should("have.length.greaterThan", 0);
 });

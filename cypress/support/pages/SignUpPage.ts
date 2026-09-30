@@ -3,8 +3,9 @@ class SignUpPage {
     return cy.get('form[aria-label="signup-form"]');
   }
 
+  // The sign up page has no <main> and no id on the heading, but it has a single h1
   get heading() {
-    return cy.get("h1").first();
+    return cy.get("h1");
   }
 
   get emailInput() {

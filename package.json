@@ -16,7 +16,7 @@
   "scripts": {
     "open": "cypress open --config-file config/cypress.config.ts",
     "test": "cypress run --config-file config/cypress.config.ts",
-    "test:ci": "cypress run --config-file config/cypress.ci.config.ts ${TAGS:+--expose \"tags=$TAGS\"}",
+    "test:ci": "cypress run --config-file config/cypress.ci.config.ts",
     "test:critical": "cypress run --config-file config/cypress.config.ts --expose tags=@critical",
     "report": "node scripts/generate-report.mjs",
     "lint": "eslint .",

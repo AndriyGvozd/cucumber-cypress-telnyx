@@ -10,8 +10,9 @@ When("I click the Log in link in the header", () => {
 });
 
 Then("I should be redirected to the portal login page", () => {
-  // Code inside cy.origin runs on another domain and cannot use outer variables,
-  // so the data is passed in explicitly via args
+  // Code inside cy.origin runs on another domain and cannot use outer variables or imports,
+  // so the data is passed in explicitly via args, and selectors are written inline
+  // instead of going through a page object
   const { origin, ...portal } = content.portal;
   cy.origin(
     origin,
@@ -19,8 +20,9 @@ Then("I should be redirected to the portal login page", () => {
     ({ loginPath, title, heading, timeout }) => {
       cy.url({ timeout }).should("include", loginPath);
       cy.title().should("contain", title);
-      cy.contains("h1, h2", heading).should("be.visible");
-      cy.get('input[name="email"]').should("be.visible");
+      // The portal has real test ids, unlike telnyx.com
+      cy.get('[data-testid="login.signin.title"]').should("be.visible").and("contain.text", heading);
+      cy.get('form[aria-label="loginForm"] input[name="email"]').should("be.visible");
     },
   );
 });

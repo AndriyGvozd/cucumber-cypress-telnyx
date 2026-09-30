@@ -1,12 +1,21 @@
 import { BasePage } from "./BasePage";
 
 class ProductPage extends BasePage {
-  get description() {
-    return this.heading.parent().find("p").first();
+  // The first section of a product page is the hero; its id is a generated CMS id, so it is not used
+  get hero() {
+    return cy.get("main section:first-of-type");
   }
 
-  cta(text: string) {
-    return cy.get("main").contains("a", text);
+  get heading() {
+    return this.hero.find<HTMLElement>("h1");
+  }
+
+  get description() {
+    return this.hero.find("p").first();
+  }
+
+  heroLink(path: string) {
+    return this.hero.find(`a[href="${path}"]`);
   }
 }
 

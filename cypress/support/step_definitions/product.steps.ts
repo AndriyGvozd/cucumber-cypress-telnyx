@@ -9,6 +9,6 @@ Then("the product description should be visible", () => {
   productPage.description.should("be.visible").and("not.be.empty");
 });
 
-Then("the {string} button should be visible", (text: string) => {
-  productPage.cta(text).should("be.visible");
+Then("the hero button {string} should lead to {string}", (text: string, path: string) => {
+  productPage.heroLink(path).should("be.visible").and("contain.text", text);
 });

@@ -11,6 +11,6 @@ When("I open the {string} menu", (name: string) => {
   header.openMenu(name);
 });
 
-When("I click {string} in the menu", (name: string) => {
-  header.dropdownLink(name).click();
+When("I click the {string} menu link to {string}", (name: string, path: string) => {
+  header.dropdownLink(name, path).should("be.visible").click();
 });

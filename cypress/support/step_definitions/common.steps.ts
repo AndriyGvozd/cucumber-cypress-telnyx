@@ -7,7 +7,3 @@ Then("the URL should contain {string}", (path: string) => {
 Then("the page title should contain {string}", (text: string) => {
   cy.title().should("contain", text);
 });
-
-Then("the page heading should contain {string}", (text: string) => {
-  cy.contains("h1, h2", text).should("be.visible");
-});

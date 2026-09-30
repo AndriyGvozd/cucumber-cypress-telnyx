@@ -24,6 +24,6 @@ Then("the footer should contain social links:", (table: DataTable) => {
 
 Then("the footer legal links should be valid:", (table: DataTable) => {
   table.hashes().forEach(({ link, path }) => {
-    footer.link(link).should("be.visible").and("have.attr", "href", path);
+    footer.link(path).should("be.visible").and("contain.text", link);
   });
 });

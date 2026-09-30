@@ -1,9 +1,11 @@
 import { LONG_TIMEOUT } from "../constants";
 
 class ContactPage {
-  // Marketo form is loaded by a third-party script, so it can take longer to appear
+  // Marketo form is loaded by a third-party script, so it can take longer to appear.
+  // The id (mktoForm_<number>) changes if the form is replaced in Marketo, so we use the
+  // generic Marketo class; the page also has an empty form with this class, hence :has(submit)
   get form() {
-    return cy.get("#mktoForm_1987", { timeout: LONG_TIMEOUT });
+    return cy.get('form.mktoForm:has(button[type="submit"])', { timeout: LONG_TIMEOUT });
   }
 
   get submitButton() {
@@ -11,15 +13,12 @@ class ContactPage {
   }
 
   get errorMessage() {
-    return cy.get(".mktoError:visible");
+    return this.form.find('.mktoErrorMsg[role="alert"]:visible');
   }
 
-  // Finds a field by its visible label, e.g. "First name"
-  field(label: string) {
-    return this.form
-      .contains("label", label)
-      .invoke("attr", "for")
-      .then((id) => this.form.find(`#${id}`));
+  // Field names are CRM (Marketo/Salesforce) field keys, more stable than visible labels
+  field(name: string) {
+    return this.form.find(`[name="${name}"]`);
   }
 
   open() {

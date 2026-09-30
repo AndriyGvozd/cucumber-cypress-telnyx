@@ -15,8 +15,8 @@ Then("I should see the contact form error {string}", (text: string) => {
 });
 
 Then("the following contact fields should be marked as invalid:", (table: DataTable) => {
-  table.raw().forEach(([id]) => {
-    contactPage.field(id).should("have.class", "mktoInvalid");
+  table.hashes().forEach(({ field }) => {
+    contactPage.field(field).should("have.class", "mktoInvalid");
   });
 });
 

@@ -8,7 +8,7 @@ When("I click the Sign up button in the header", () => {
 });
 
 Then("the sign up form should be displayed", () => {
-  signUpPage.heading.should("be.visible").and("contain.text", content.signUp.heading);
+  signUpPage.heading.should("have.length", 1).and("be.visible").and("contain.text", content.signUp.heading);
   signUpPage.form.should("be.visible");
   signUpPage.emailInput.should("be.visible");
   signUpPage.termsCheckbox.should("exist");
@@ -47,6 +47,8 @@ When("I enter {string} into the email field", (email: string) => {
 });
 
 When("I accept the Terms and Privacy Policy", () => {
+  // The checkbox is custom-styled: the native input is visually hidden under the styled box,
+  // so Cypress considers it covered; force skips that check, and "be.checked" verifies the result
   signUpPage.termsCheckbox.check({ force: true }).should("be.checked");
 });
 

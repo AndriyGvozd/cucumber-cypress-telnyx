@@ -11,5 +11,8 @@ export default defineConfig({
     pageLoadTimeout: 90000,
     video: true,
     screenshotOnRunFailure: true,
+    // Optional Cucumber tag filter from the TAGS env variable (set by the workflow's manual run).
+    // Read here instead of in the npm script, so the command works in any shell, including Windows cmd
+    ...(process.env.TAGS ? { expose: { tags: process.env.TAGS } } : {}),
   },
 });

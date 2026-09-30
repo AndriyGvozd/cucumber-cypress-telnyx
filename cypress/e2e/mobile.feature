@@ -13,6 +13,6 @@ Feature: Mobile navigation
       | Why Telnyx |
       | Resources  |
       | Developers |
-    When I click the "Contact us" link in the burger menu
+    When I click the "Contact us" burger menu link to "/contact-us"
     Then the URL should contain "/contact-us"
     And the contact us form should be visible
